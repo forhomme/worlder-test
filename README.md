@@ -8,9 +8,7 @@
 2. Business Layer --> usecase layer
 3. Infrastructure Layer --> from inside to outside
    
-    
-    worlder/
-       .
+
        ├── ...
        ├── app                  # this folder for all application logic
             └── core            # business layer
@@ -23,9 +21,9 @@
             └── interface       # interface layer
                 └── api
             └── utils           # utility function
-       └── assets               # all image 
-       └── docker-compose.yml
-       └── Dockerfile
+       ├── assets               # all image 
+       ├── docker-compose.yml
+       ├── Dockerfile
        ├── internal
             └── config          # global and init config
        └── main.go              # main file to run
