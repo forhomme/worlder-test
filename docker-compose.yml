@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=sensor
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      - app-network
+
+  service:
+    container_name: worlder-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "9000:9000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    links:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
+    name: worlder_default
+
+volumes:
+  db:
+    driver: local
